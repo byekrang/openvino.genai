@@ -9,6 +9,7 @@
 #include "openvino/pass/manager.hpp"
 #include "utils.hpp"
 #include "whisper/alignment_heads.hpp"
+#include "whisper/transformations/cross_kv_beam_gather.hpp"  // EXPERIMENTAL (not for merge)
 #include "whisper/word_level_timestamps.hpp"
 
 namespace {
@@ -49,6 +50,12 @@ WhisperStatefullDecoder::WhisperStatefullDecoder(const std::filesystem::path& mo
         }
 
         utils::apply_slice_before_matmul_transformation(model);
+
+        // EXPERIMENTAL (not for merge) — Candidate #4: make cross-attention KV
+        // follow beam_idx like self-attention KV. Correct, but the inserted
+        // Gather runs every decoder step (incl. identity beam_idx) -> ~55-93%
+        // per-step CPU regression. See experiments/whisper-cross-kv-graph-gather/.
+        ov::genai::insert_cross_kv_beam_gather(model);
 
         compiled_model = core.compile_model(model, device, properties);
     }
