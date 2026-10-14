@@ -41,6 +41,7 @@
   components:
     - automatic_speech_recognition
 
+<<<<<<< HEAD
 - name: ASR (SenseVoice)
   cmd: |-
     python -m pip install transformers==4.57.6 funasr==1.4.1
@@ -63,6 +64,8 @@
   components:
     - automatic_speech_recognition
 
+=======
+>>>>>>> d7c735a1 (Refine ASR AnyMap bindings and converter tests)
 - name: Cacheopt E2E (Part 1)
   cmd: |-
     python -m pytest -v ./tests/python_tests/test_kv_cache_eviction/test_kv_cache_eviction_1.py
