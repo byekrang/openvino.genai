@@ -653,6 +653,63 @@ Such prompts can be used to steer the model to use particular spellings or style
 For the ASR API, refer to the [ASR Generation Config API](https://docs.openvino.ai/2026/api/genai_api/_autosummary/openvino_genai.ASRGenerationConfig.html).
 :::
 
+### Voice Activity Detection
+
+`VoiceActivityDetector` is a standalone class that finds speech regions in mono 16 kHz audio with [Silero VAD](https://github.com/snakers4/silero-vad). It returns sorted, non-overlapping `SpeechSegment` values with `start_sample` and `end_sample` sample indices (end exclusive).
+
+#### Preparing the Model
+
+Copy `silero_vad_16k_sequence.onnx` from the [Silero VAD repository](https://github.com/snakers4/silero-vad) into an empty directory. Versions 6.2.2 and 6.2.3 are validated. In version 6.2.3, the file is located at `src/silero_vad/data/silero_vad_16k_sequence.onnx` and has SHA-256 `9ccdacc4719d8aa7e45a77536bfabec45a03ba1f2fad5e241ab4060b24238a85`.
+
+<LanguageTabs>
+    <TabItemPython>
+        ```python
+        import openvino_genai as ov_genai
+
+        detector = ov_genai.VoiceActivityDetector(vad_model_path, "CPU")
+        for segment in detector.detect(raw_speech):
+            print(f"[{segment.start_sample / 16000:.2f}, {segment.end_sample / 16000:.2f}]")
+
+        # Split speech segments longer than 30 seconds
+        config = ov_genai.SileroVADConfig()
+        config.max_speech_duration_s = 30.0
+        detector = ov_genai.VoiceActivityDetector(vad_model_path, "CPU", silero_vad_config=config)
+        ```
+    </TabItemPython>
+    <TabItemCpp>
+        ```cpp
+        #include "openvino/genai/automatic_speech_recognition/voice_activity_detector.hpp"
+
+        int main() {
+            ov::genai::VoiceActivityDetector detector(vad_model_path, "CPU");
+            for (const auto& segment : detector.detect(raw_speech)) {
+                std::cout << "[" << segment.start_sample / 16000.0 << ", " << segment.end_sample / 16000.0 << "]\n";
+            }
+
+            // Split speech segments longer than 30 seconds
+            ov::genai::SileroVADConfig config;
+            config.max_speech_duration_s = 30.0;
+            ov::genai::VoiceActivityDetector limited_detector(vad_model_path, "CPU", ov::genai::silero_vad_config(config));
+        }
+        ```
+    </TabItemCpp>
+</LanguageTabs>
+
+`SileroVADConfig` options follow upstream Silero VAD `get_speech_timestamps()` for 16 kHz audio:
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `threshold` | 0.5 | Speech probability at or above which a window starts or continues speech. Must be in (0, 1). |
+| `neg_threshold` | `None` | Speech probability below which a window counts as silence. When unset, `max(threshold - 0.15, 0.01)` is used. When set, must be in (0, `threshold`]. |
+| `min_speech_duration_ms` | 250 | Segments not longer than this are dropped. |
+| `min_silence_duration_ms` | 100 | Minimum silence that ends a speech segment. |
+| `speech_pad_ms` | 30 | Padding added to both sides of each segment. When neighbouring segments are closer than twice this value, the gap between them is split evenly. |
+| `max_speech_duration_s` | infinity | Longer segments are split. Must be positive; infinity disables splitting. |
+| `min_silence_at_max_speech_ms` | 98 | Minimum silence considered as a split point for segments longer than `max_speech_duration_s`. |
+| `use_max_poss_sil_at_max_speech` | `True` | Split overlong segments at their longest silence instead of the most recent one. |
+
+The model state is reset on every `detect()` call. `detect()` raises an exception if the audio contains NaN or infinite samples. An instance must not be used from multiple threads concurrently.
+
 ### Performance Metrics
 
 `ASRPipeline` returns `ASRDecodedResults` with a `perf_metrics` field of type `ASRPerfMetrics`, which extends [`PerfMetrics`](/docs/guides/performance-metrics).

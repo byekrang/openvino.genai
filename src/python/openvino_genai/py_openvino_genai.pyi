@@ -5,7 +5,7 @@ from __future__ import annotations
 import collections.abc
 import openvino._pyopenvino
 import typing
-__all__: list[str] = ['ASRDecodedResultChunk', 'ASRDecodedResults', 'ASRForcedAligner', 'ASRGenerationConfig', 'ASRPerfMetrics', 'ASRPipeline', 'ASRRawPerfMetrics', 'Adapter', 'AdapterConfig', 'AdaptiveRKVConfig', 'AggregationMode', 'AutoencoderKL', 'AutoencoderKLLTX2Audio', 'AutoencoderKLLTX2Video', 'AutoencoderKLLTXVideo', 'CLIPTextModel', 'CLIPTextModelWithProjection', 'CacheEvictionConfig', 'ChatHistory', 'ContinuousBatchingPipeline', 'CppStdGenerator', 'DecodedResults', 'DeepSeekR1ReasoningIncrementalParser', 'DeepSeekR1ReasoningParser', 'EmbedResult', 'EmbeddingPipeline', 'EncodedGenerationResult', 'EncodedResults', 'ExtendedPerfMetrics', 'Flux2Transformer2DModel', 'FluxTransformer2DModel', 'GGUFTokenizer', 'Gemma3TextEncoder', 'GenerationConfig', 'GenerationFinishReason', 'GenerationHandle', 'GenerationOutput', 'GenerationResult', 'GenerationStatus', 'Generator', 'Image2ImagePipeline', 'Image2VideoPipeline', 'ImageGenerationConfig', 'ImageGenerationPerfMetrics', 'IncrementalParser', 'InpaintingPipeline', 'KVCrushAnchorPointMode', 'KVCrushConfig', 'LLMPipeline', 'LTX2TextConnectors', 'LTX2VideoTransformer3DModel', 'LTX2Vocoder', 'LTXVideoTransformer3DModel', 'Llama3JsonToolParser', 'Llama3PythonicToolParser', 'MeanStdPair', 'OmniDecodedResults', 'OmniPipeline', 'OmniSpeechStreamerBase', 'OmniTalkerSpeechConfig', 'Parser', 'PerfMetrics', 'Phi4ReasoningIncrementalParser', 'Phi4ReasoningParser', 'PipelineMetrics', 'Qwen2_5_VLForConditionalGeneration', 'Qwen3TextEncoder', 'Qwen3VLForConditionalGeneration', 'QwenImage21Transformer2DModel', 'QwenImageTransformer2DModel', 'RawImageGenerationPerfMetrics', 'RawPerfMetrics', 'ReasoningIncrementalParser', 'ReasoningParser', 'SD3Transformer2DModel', 'SDPerModelsPerfMetrics', 'SDPerfMetrics', 'Scheduler', 'SchedulerConfig', 'SparseAttentionConfig', 'SparseAttentionMode', 'SpeechGenerationConfig', 'SpeechGenerationPerfMetrics', 'StopCriteria', 'StreamerBase', 'StreamingStatus', 'StructuralTagItem', 'StructuralTagsConfig', 'StructuredOutputConfig', 'SummaryStats', 'T5EncoderModel', 'Talker', 'TalkerBase', 'TalkerPerfMetrics', 'TalkerResults', 'TaylorSeerCacheConfig', 'Text2ImagePipeline', 'Text2SpeechDecodedResults', 'Text2SpeechPipeline', 'Text2VideoPipeline', 'TextEmbeddingPipeline', 'TextParserStreamer', 'TextRerankPipeline', 'TextStreamer', 'TokenizedInputs', 'Tokenizer', 'TorchGenerator', 'UNet2DConditionModel', 'VLLMParserWrapper', 'VLMDecodedResults', 'VLMPerfMetrics', 'VLMPipeline', 'VLMPipelineBase', 'VLMRawPerfMetrics', 'VideoGenerationConfig', 'VideoGenerationPerfMetrics', 'VideoGenerationResult', 'VideoMetadata', 'WhisperDecodedResultChunk', 'WhisperDecodedResults', 'WhisperGenerationConfig', 'WhisperPerfMetrics', 'WhisperPipeline', 'WhisperRawPerfMetrics', 'WhisperWordTiming', 'ZImageTransformer2DModel', 'draft_model', 'get_version']
+__all__: list[str] = ['ASRDecodedResultChunk', 'ASRDecodedResults', 'ASRForcedAligner', 'ASRGenerationConfig', 'ASRPerfMetrics', 'ASRPipeline', 'ASRRawPerfMetrics', 'Adapter', 'AdapterConfig', 'AdaptiveRKVConfig', 'AggregationMode', 'AutoencoderKL', 'AutoencoderKLLTX2Audio', 'AutoencoderKLLTX2Video', 'AutoencoderKLLTXVideo', 'CLIPTextModel', 'CLIPTextModelWithProjection', 'CacheEvictionConfig', 'ChatHistory', 'ContinuousBatchingPipeline', 'CppStdGenerator', 'DecodedResults', 'DeepSeekR1ReasoningIncrementalParser', 'DeepSeekR1ReasoningParser', 'EmbedResult', 'EmbeddingPipeline', 'EncodedGenerationResult', 'EncodedResults', 'ExtendedPerfMetrics', 'Flux2Transformer2DModel', 'FluxTransformer2DModel', 'GGUFTokenizer', 'Gemma3TextEncoder', 'GenerationConfig', 'GenerationFinishReason', 'GenerationHandle', 'GenerationOutput', 'GenerationResult', 'GenerationStatus', 'Generator', 'Image2ImagePipeline', 'Image2VideoPipeline', 'ImageGenerationConfig', 'ImageGenerationPerfMetrics', 'IncrementalParser', 'InpaintingPipeline', 'KVCrushAnchorPointMode', 'KVCrushConfig', 'LLMPipeline', 'LTX2TextConnectors', 'LTX2VideoTransformer3DModel', 'LTX2Vocoder', 'LTXVideoTransformer3DModel', 'Llama3JsonToolParser', 'Llama3PythonicToolParser', 'MeanStdPair', 'OmniDecodedResults', 'OmniPipeline', 'OmniSpeechStreamerBase', 'OmniTalkerSpeechConfig', 'Parser', 'PerfMetrics', 'Phi4ReasoningIncrementalParser', 'Phi4ReasoningParser', 'PipelineMetrics', 'Qwen2_5_VLForConditionalGeneration', 'Qwen3TextEncoder', 'Qwen3VLForConditionalGeneration', 'QwenImage21Transformer2DModel', 'QwenImageTransformer2DModel', 'RawImageGenerationPerfMetrics', 'RawPerfMetrics', 'ReasoningIncrementalParser', 'ReasoningParser', 'SD3Transformer2DModel', 'SDPerModelsPerfMetrics', 'SDPerfMetrics', 'Scheduler', 'SchedulerConfig', 'SileroVADConfig', 'SparseAttentionConfig', 'SparseAttentionMode', 'SpeechGenerationConfig', 'SpeechGenerationPerfMetrics', 'SpeechSegment', 'StopCriteria', 'StreamerBase', 'StreamingStatus', 'StructuralTagItem', 'StructuralTagsConfig', 'StructuredOutputConfig', 'SummaryStats', 'T5EncoderModel', 'Talker', 'TalkerBase', 'TalkerPerfMetrics', 'TalkerResults', 'TaylorSeerCacheConfig', 'Text2ImagePipeline', 'Text2SpeechDecodedResults', 'Text2SpeechPipeline', 'Text2VideoPipeline', 'TextEmbeddingPipeline', 'TextParserStreamer', 'TextRerankPipeline', 'TextStreamer', 'TokenizedInputs', 'Tokenizer', 'TorchGenerator', 'UNet2DConditionModel', 'VLLMParserWrapper', 'VLMDecodedResults', 'VLMPerfMetrics', 'VLMPipeline', 'VLMPipelineBase', 'VLMRawPerfMetrics', 'VideoGenerationConfig', 'VideoGenerationPerfMetrics', 'VideoGenerationResult', 'VideoMetadata', 'VoiceActivityDetector', 'WhisperDecodedResultChunk', 'WhisperDecodedResults', 'WhisperGenerationConfig', 'WhisperPerfMetrics', 'WhisperPipeline', 'WhisperRawPerfMetrics', 'WhisperWordTiming', 'ZImageTransformer2DModel', 'draft_model', 'get_version']
 class ASRDecodedResultChunk:
     """
     
@@ -4526,6 +4526,80 @@ class SchedulerConfig:
     @num_linear_attention_blocks.setter
     def num_linear_attention_blocks(self, arg0: typing.SupportsInt) -> None:
         ...
+class SileroVADConfig:
+    """
+    Segmentation options for the Silero voice activity detector. Semantics follow upstream Silero VAD get_speech_timestamps() for 16 kHz audio.
+    """
+    def __init__(self) -> None:
+        ...
+    def validate(self) -> None:
+        """
+        Raises an exception if a value is out of range.
+        """
+    @property
+    def max_speech_duration_s(self) -> float:
+        """
+        Maximum segment duration; longer segments are split. Infinity disables splitting.
+        """
+    @max_speech_duration_s.setter
+    def max_speech_duration_s(self, arg0: typing.SupportsFloat) -> None:
+        ...
+    @property
+    def min_silence_at_max_speech_ms(self) -> int:
+        """
+        Minimum silence considered as a split point for overlong segments.
+        """
+    @min_silence_at_max_speech_ms.setter
+    def min_silence_at_max_speech_ms(self, arg0: typing.SupportsInt) -> None:
+        ...
+    @property
+    def min_silence_duration_ms(self) -> int:
+        """
+        Minimum silence that ends a speech segment.
+        """
+    @min_silence_duration_ms.setter
+    def min_silence_duration_ms(self, arg0: typing.SupportsInt) -> None:
+        ...
+    @property
+    def min_speech_duration_ms(self) -> int:
+        """
+        Segments not longer than this are dropped.
+        """
+    @min_speech_duration_ms.setter
+    def min_speech_duration_ms(self, arg0: typing.SupportsInt) -> None:
+        ...
+    @property
+    def neg_threshold(self) -> float | None:
+        """
+        Silence probability threshold in (0, threshold]; max(threshold - 0.15, 0.01) when None.
+        """
+    @neg_threshold.setter
+    def neg_threshold(self, arg0: typing.SupportsFloat | None) -> None:
+        ...
+    @property
+    def speech_pad_ms(self) -> int:
+        """
+        Padding added to both sides of a segment.
+        """
+    @speech_pad_ms.setter
+    def speech_pad_ms(self, arg0: typing.SupportsInt) -> None:
+        ...
+    @property
+    def threshold(self) -> float:
+        """
+        Speech probability threshold in (0, 1).
+        """
+    @threshold.setter
+    def threshold(self, arg0: typing.SupportsFloat) -> None:
+        ...
+    @property
+    def use_max_poss_sil_at_max_speech(self) -> bool:
+        """
+        Split overlong segments at their longest silence instead of the most recent one.
+        """
+    @use_max_poss_sil_at_max_speech.setter
+    def use_max_poss_sil_at_max_speech(self, arg0: bool) -> None:
+        ...
 class SparseAttentionConfig:
     """
     
@@ -4823,6 +4897,25 @@ class SpeechGenerationPerfMetrics(PerfMetrics):
         ...
     @property
     def throughput(self) -> MeanStdPair:
+        ...
+class SpeechSegment:
+    """
+    Speech region on the input audio timeline, as 16 kHz sample indices [start_sample, end_sample).
+    """
+    __hash__: typing.ClassVar[None] = None
+    def __eq__(self, arg0: SpeechSegment) -> bool:
+        ...
+    def __init__(self, start_sample: typing.SupportsInt, end_sample: typing.SupportsInt) -> None:
+        ...
+    def __ne__(self, arg0: SpeechSegment) -> bool:
+        ...
+    def __repr__(self) -> str:
+        ...
+    @property
+    def end_sample(self) -> int:
+        ...
+    @property
+    def start_sample(self) -> int:
         ...
 class StopCriteria:
     """
@@ -7108,6 +7201,25 @@ class VideoMetadata:
     @frames_indices.setter
     def frames_indices(self, arg0: collections.abc.Sequence[typing.SupportsInt]) -> None:
         ...
+class VoiceActivityDetector:
+    """
+    Standalone voice activity detector for mono 16 kHz audio with the Silero VAD model.
+    """
+    def __init__(self, models_path: os.PathLike | str | bytes, device: str, **kwargs) -> None:
+        """
+                    VoiceActivityDetector class constructor.
+                    models_path (os.PathLike): Directory containing silero_vad_16k_sequence.onnx from Silero VAD.
+                    device (str): Device to run the model on (e.g., CPU).
+        
+                    Keyword arguments: silero_vad_config (SileroVADConfig) and OpenVINO compile properties.
+        
+                    Concurrent detect() calls on the same instance are not supported; use one instance per thread.
+        """
+    def detect(self, audio: collections.abc.Sequence[typing.SupportsFloat]) -> list[SpeechSegment]:
+        """
+                    Detects speech and returns sorted, non-overlapping list[SpeechSegment]; empty when there is no speech.
+                    Raises an exception if the audio contains NaN or infinite samples.
+        """
 class WhisperDecodedResultChunk:
     """
     
