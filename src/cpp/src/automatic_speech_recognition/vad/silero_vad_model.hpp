@@ -13,6 +13,7 @@
 
 namespace ov::genai::silero_vad {
 
+constexpr const char* OPENVINO_MODEL_FILE = "openvino_model.xml";
 constexpr const char* SEQUENCE_MODEL_FILE = "silero_vad_16k_sequence.onnx";
 constexpr size_t CONTEXT_SAMPLES = 64;
 constexpr size_t STATE_SIZE = 128;

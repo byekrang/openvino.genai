@@ -72,6 +72,24 @@ void validate_io_contract(const std::shared_ptr<ov::Model>& model, const std::fi
     expect_port(model->outputs(), "cn", state, model_path);
 }
 
+std::filesystem::path find_model_file(const std::filesystem::path& models_path) {
+    using ov::genai::silero_vad::OPENVINO_MODEL_FILE;
+    using ov::genai::silero_vad::SEQUENCE_MODEL_FILE;
+    for (const char* file : {OPENVINO_MODEL_FILE, SEQUENCE_MODEL_FILE}) {
+        const std::filesystem::path model_path = models_path / file;
+        if (std::filesystem::is_regular_file(model_path)) {
+            return model_path;
+        }
+    }
+    OPENVINO_THROW("Silero VAD model not found in ",
+                   models_path,
+                   ": expected ",
+                   OPENVINO_MODEL_FILE,
+                   " or ",
+                   SEQUENCE_MODEL_FILE,
+                   " (validated with silero-vad 6.2.2 and 6.2.3)");
+}
+
 }  // namespace
 
 namespace ov::genai::silero_vad {
@@ -82,12 +100,7 @@ SileroVADModel::SileroVADModel(const std::filesystem::path& models_path,
     OPENVINO_ASSERT(std::filesystem::is_directory(models_path),
                     "Silero VAD models_path must be a directory, got ",
                     models_path);
-    const std::filesystem::path model_path = models_path / SEQUENCE_MODEL_FILE;
-    OPENVINO_ASSERT(std::filesystem::is_regular_file(model_path),
-                    "Silero VAD model file ",
-                    SEQUENCE_MODEL_FILE,
-                    " (validated with silero-vad 6.2.2 and 6.2.3) not found in ",
-                    models_path);
+    const std::filesystem::path model_path = find_model_file(models_path);
 
     ov::Core& core = utils::singleton_core();
     const std::shared_ptr<ov::Model> model = core.read_model(model_path);
